@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./script/index.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+
+    <title>SPA</title>
+</head>
+<body>
+
+    <table class="table table-bordered ">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Create At</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-center">
+        <button type="button" title="Add user" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add user
+        </button>
+        <!-- Modal Add-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-user" action="http://localhost:3333/api/add/users" method="POST">
+                        <label>Name</label>
+                        <input type="text" class="form-control add-name" name="name" placeholder="กรอกชื่อจริง">
+                        <label>LastName</label>
+                        <input type="text" class="form-control add-lastname" name="lastname" placeholder="กรอกนามสกุล">
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- Modal Edit-->
+        <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="labelEdit" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="labelEdit">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-user" action="http://localhost:3333/api/update/users" >
+                        <label>Name</label>
+                        <input type="text" class="form-control edit-name" name="name">
+                        <label>LastName</label>
+                        <input type="text" class="form-control edit-lastname" name="last_name">
+                        <div class="modal-footer d-flex justify-content-center footer-edit">
+                            <button type="submit" class="btn btn-warning">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- Modal Delete-->
+        <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="labelDelete" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="labelDelete">Delete User</h5>
+                <button type="button" class="btn-close" id="close-delete" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="delete-user" action="http://localhost:3333/api/delete/users" >
+                        <label>Name</label>
+                        <input type="text" class="form-control delete-name" name="name" value="" disabled>
+                        <label>LastName</label>
+                        <input type="text" class="form-control delete-lastname" name="last_name" value="" disabled>
+                        <div class="modal-footer d-flex justify-content-center footer-delete">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    
+</body>
+</html>
