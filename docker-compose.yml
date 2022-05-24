@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  nodejs_hw:
+    container_name: nodejs_hw
+    build: nodejs-api/
+    restart: always
+    volumes:
+      - .:/usr/app
+      - /usr/app/src/node_modules
+    environment:
+      - PORT=3333
+      - HOST=0.0.0.0
+      - USER=root
+      - PASSWORD=1234
+      - DATABASE_NAME=nodejs_api
+    expose:
+      - "3333"
+
+  front_hw:
+    container_name: front_hw
+    build: pages/
+    restart: always
+
+    ports:
+      - "8880:80"
+
+  mysqldb_hw:
+    container_name: mysqldb_lab
+    image: mysql:5.7
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-fk", "tcp://localhost:3306"]
+      interval: 300s
+      timeout: 400s
+      retries: 10
+    ports:
+      - '3306'
+    command: --innodb_use_native_aio=0 --socket=/tmp/mysql.sock --bind_address=0.0.0.0      
+    volumes:
+      - ./mysqldb/initdb/:/docker-entrypoint-initdb.d
+      - ./mysqldb/data/:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=coursedb
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=1234
+      - MYSQL_ROOT_PASSWORD=1234
+      - TERM=xterm
+      - TZ=Asia/Bangkok     
+networks:
+  default:
+    external:
+      name: web_hw
